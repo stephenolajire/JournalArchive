@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import styles from "../css/Signup.module.css";
+import styles from "../css/SignUp.module.css";
 import api from "../constant/api";
 import { useNavigate } from "react-router-dom";
 

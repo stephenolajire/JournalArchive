@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 # }
 
 DATABASES = {
-    "default": dj_database_url.parse(config("external_url"))
+    "default": dj_database_url.parse(config("SERVICE_URI"))
 }
 
 # Password validation
@@ -148,7 +148,7 @@ AUTH_USER_MODEL = 'User.CustomUser'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://swiftserve-krxi.onrender.com"
+    "https://journalarchive-j2sm.onrender.com"
 ]
 
 REST_FRAMEWORK = {
