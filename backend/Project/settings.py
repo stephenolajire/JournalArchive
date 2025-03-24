@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 # }
 
 DATABASES = {
-    "default": dj_database_url.parse(config("SERVICE_URI"))
+    "default": dj_database_url.parse(config("DATABASE_URL"))
 }
 
 # Password validation
