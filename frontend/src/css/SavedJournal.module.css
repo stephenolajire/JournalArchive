@@ -1,0 +1,249 @@
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--container-padding);
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: var(--border-radius-sm);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.card {
+  background: var(--light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card h3 {
+  font-size: var(--font-size-xl);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-sm);
+}
+
+.faculty {
+  font-size: var(--font-size-lg);
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: var(--spacing-md);
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--gray-100);
+  border-radius: var(--border-radius-sm);
+}
+
+.desc {
+  color: var(--gray-600);
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+  display: -webkit-box;
+  /* -webkit-line-clamp: 3; */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--gray-200);
+}
+
+.actions button,
+.actions a {
+  background: transparent;
+  border: none;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: var(--font-size-xl);
+  color: var(--gray-600);
+  transition: color var(--transition-fast);
+}
+
+.actions button:hover .icon,
+.actions a:hover .icon {
+  color: var(--primary);
+}
+
+.actions button:first-child:hover .icon {
+  color: #dc2626; /* Red color for delete action */
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: var(--gray-100);
+  border-radius: var(--border-radius-lg);
+  color: var(--gray-600);
+  font-size: var(--font-size-lg);
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: var(--light);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
+.modalContent h3 {
+  color: var(--primary);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.modalContent p {
+  color: var(--gray-700);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+.modalContent button {
+  background-color: var(--primary);
+  color: var(--light);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.modalContent button:hover {
+  background-color: var(--primary-light);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--gray-800);
+    border-color: var(--gray-700);
+  }
+
+  .card h3 {
+    color: var(--gray-100);
+  }
+
+  .faculty {
+    background: var(--gray-700);
+    color: var(--primary-light);
+  }
+
+  .desc {
+    color: var(--gray-400);
+  }
+
+  .actions {
+    border-color: var(--gray-700);
+  }
+
+  .icon {
+    color: var(--gray-400);
+  }
+
+  .empty {
+    background: var(--gray-800);
+    color: var(--gray-400);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+    text-align: center;
+  }
+
+  .title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+}

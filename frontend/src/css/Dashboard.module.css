@@ -1,0 +1,306 @@
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--gray-100);
+}
+
+.sidebar {
+  width: 32rem;
+  background-color: var(--light);
+  padding: var(--spacing-lg);
+  border-right: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transition: all var(--transition-normal);
+}
+
+.facultyButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-md);
+  color: var(--gray-700);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: var(--spacing-sm);
+}
+
+.facultyButton svg {
+  font-size: var(--font-size-xl);
+}
+
+.facultyButton:hover {
+  background-color: var(--gray-100);
+  color: var(--primary);
+}
+
+.facultyButton.active {
+  background-color: var(--primary);
+  color: var(--light);
+}
+
+.mainContent {
+  flex: 1;
+  padding: var(--spacing-xl);
+}
+
+.mainContent h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-xl);
+}
+
+.journalGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.journalCard {
+  background-color: var(--light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+}
+
+.journalCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.journalCard h3 {
+  color: var(--primary);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.journalCard p {
+  color: var(--gray-600);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.cardActions {
+  display: flex;
+  gap: var(--spacing-md);
+  color: var(--gray-500);
+  font-size: var(--font-size-xl);
+  justify-content: flex-end;
+}
+
+.cardActions svg {
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.cardActions svg:hover {
+  color: var(--primary);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.pagination button {
+  background: var(--light);
+  border: 1px solid var(--gray-300);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pagination button:hover:not(:disabled) {
+  background: var(--primary);
+  color: var(--light);
+  border-color: var(--primary);
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: var(--gray-700);
+  font-size: var(--font-size-md);
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: var(--light);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
+.modalContent h3 {
+  color: var(--primary);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.modalContent p {
+  color: var(--gray-700);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+.modalContent button {
+  background-color: var(--primary);
+  color: var(--light);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.modalContent button:hover {
+  background-color: var(--primary-light);
+}
+
+@media (max-width: 768px) {
+  .dashboardContainer {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: var(--spacing-md);
+    border-right: none;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .facultyButton {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .mainContent {
+    padding: var(--spacing-md);
+  }
+
+  .journalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modalContent {
+    margin: var(--spacing-md);
+    padding: var(--spacing-lg);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    background-color: var(--gray-800);
+    border-color: var(--gray-700);
+  }
+
+  .facultyButton {
+    color: var(--gray-300);
+  }
+
+  .facultyButton:hover {
+    background-color: var(--gray-700);
+  }
+
+  .journalCard {
+    background-color: var(--gray-800);
+  }
+
+  .journalCard h3 {
+    color: var(--primary-light);
+  }
+
+  .journalCard p {
+    color: var(--gray-300);
+  }
+
+  .modalContent {
+    background-color: var(--gray-800);
+  }
+
+  .modalContent h3 {
+    color: var(--primary-light);
+  }
+
+  .modalContent p {
+    color: var(--gray-300);
+  }
+}
+
+.download,
+.save,
+.detail {
+  height: 2rem;
+  width: 2rem;
+  color: blue;
+}
+
+.save {
+  color: var(--primary-light);
+  transition: color var(--transition-fast);
+}
+
+.detail {
+  color: var(--secondary-color);
+}
+
+.actionIcon {
+  width: 2rem;
+  height: 2rem;
+  background-color: white;
+  border: none;
+}
+
+.actionIcon.saved {
+  color: var(--primary);
+  cursor: not-allowed;
+}
+
+.actionIcon.saved:hover {
+  transform: none;
+  background: none;
+}
+
+.saved .save {
+  color: var(--primary);
+}
+
+.modalAction {
+  display: flex;
+  justify-content: space-between;
+}
