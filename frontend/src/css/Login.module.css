@@ -17,6 +17,13 @@
   transition: var(--transition-normal);
 }
 
+.forgot {
+  text-align: right;
+  font-size: var(--font-size-sm);
+  /* margin-top: var(--spacing-xs); */
+  color: blue;
+}
+
 .title {
   font-family: var(--font-family);
   font-size: var(--font-size-2xl);

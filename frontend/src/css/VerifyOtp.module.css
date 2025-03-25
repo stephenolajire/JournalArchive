@@ -1,0 +1,129 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--spacing-xl);
+  background-color: var(--gray-100);
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-2xl);
+  background: var(--light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  color: var(--gray-900);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-xl);
+}
+
+.otpContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.otpInput {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: var(--font-size-xl);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--border-radius-md);
+  background: var(--light);
+  transition: all var(--transition-fast);
+}
+
+.otpInput:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.timer {
+  text-align: center;
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}
+
+.submitBtn {
+  width: 100%;
+  padding: var(--spacing-md);
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  margin-bottom: var(--spacing-md);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.resendBtn {
+  width: 100%;
+  padding: var(--spacing-md);
+  background: var(--gray-200);
+  color: var(--gray-700);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: var(--spacing-md);
+}
+
+.resendBtn:hover {
+  background: var(--gray-300);
+}
+
+.backBtn {
+  width: 100%;
+  padding: var(--spacing-md);
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.backBtn:hover {
+  background: var(--primary-light);
+  color: var(--light);
+}
+
+@media (max-width: 768px) {
+  .form {
+    padding: var(--spacing-xl);
+  }
+  
+  .otpInput {
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -11,7 +11,7 @@ import {
   FaChevronLeft,
   FaChevronRight,
   FaUserMd,
-  FaUserGraduate
+  FaUserGraduate,
 } from "react-icons/fa";
 import styles from "../css/Dashboard.module.css";
 import api from "../constant/api";
@@ -22,7 +22,7 @@ const faculties = [
   { name: "Faculty of Engineering", icon: <FaCog /> },
   { name: "Faculty of Science", icon: <FaFlask /> },
   { name: "Faculty of Arts", icon: <FaPaintBrush /> },
-  { name: "Faculty of Basic Science", icon: <FaUserMd/> },
+  { name: "Faculty of Basic Science", icon: <FaUserMd /> },
   { name: "Faculty of Law", icon: <FaPaintBrush /> },
   { name: "Faculty of Social Science", icon: <FaUserGraduate /> },
 ];
@@ -34,6 +34,7 @@ const Dashboard = () => {
   const [modalData, setModalData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [response, setResponse] = useState({});
 
   const journalsPerPage = 9;
 
@@ -49,7 +50,9 @@ const Dashboard = () => {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
       });
-      setJournals(response.data);
+      setJournals(response.data.journals);
+      setResponse(response.data.user);
+      // console.log(response.data);
       setError(null);
     } catch (error) {
       console.error("Error fetching journals:", error);
@@ -162,7 +165,11 @@ const Dashboard = () => {
               <div key={journal.id} className={styles.journalCard}>
                 <h3>{journal.title}</h3>
                 <p className={styles.faculty}>{journal.faculty}</p>
-                {/* <p>{journal.abstract}</p> */}
+                <p>
+                  {" "}
+                  <strong>Submitted by:</strong>
+                  {response.first_name} {response.last_name}
+                </p>
                 <div className={styles.cardActions}>
                   <a
                     href={journal.file_url}
@@ -235,6 +242,12 @@ const Dashboard = () => {
             </p>
             <p>
               <strong>Keywords:</strong> {modalData.keywords}
+            </p>
+
+            <p>
+              {" "}
+              <strong>Submitted by:</strong>
+              {response.first_name} {response.last_name}
             </p>
             <div className={styles.modalAction}>
               <a

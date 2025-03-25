@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import*
 from . import views
-from .views import ListSavedJournalsView
+from .views import ListSavedJournalsView, SearchJournalsView
 
 urlpatterns = [
     path('submit/', SubmitJournalView.as_view(), name='submit-journal'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('save/', views.save_journal, name='save-journal'),
     path('saved-journals/', ListSavedJournalsView.as_view(), name='saved-journals'),
     path('save/<int:journal_id>/', views.unsave_journal, name='unsave-journal'),
+    path('list/search/', SearchJournalsView.as_view(), name='search-journals'),
 ]

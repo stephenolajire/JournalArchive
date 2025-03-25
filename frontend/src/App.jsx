@@ -10,6 +10,10 @@ import SavedJournals from "./pages/SavedJournal";
 import SubmitJournal from "./pages/SubmitJournal";
 import { GlobalProvider } from "./constant/GlobalContext";
 import ProtectedRoute from "./constant/ProtectedRoute";
+import ForgotPassword from "./user/ForgotPassword";
+import VerifyOTP from "./user/VerifyOtp";
+import ResetPassword from "./user/ResetPassword";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -35,9 +39,13 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="search" element={<SearchResults />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/verify-otp" element={<VerifyOTP />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
     </GlobalProvider>

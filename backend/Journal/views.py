@@ -5,6 +5,7 @@ from .models import *
 from .serializers import JournalSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
 class SubmitJournalView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -18,11 +19,21 @@ class SubmitJournalView(APIView):
 
 class ListUserJournalsView(APIView):
     permission_classes = [permissions.IsAuthenticated]
-
+    
     def get(self, request):
+        user = request.user
         journals = Journal.objects.all()
         serializer = JournalSerializer(journals, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        response_data = {
+            'user': {
+                'first_name': user.first_name,
+                'last_name': user.last_name
+            },
+            'journals': serializer.data
+        }
+        
+        return Response(response_data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -106,3 +117,27 @@ class ListSavedJournalsView(APIView):
                 {'message': f'Error fetching saved journals: {str(e)}'}, 
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+class SearchJournalsView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        query = request.query_params.get('q', '')
+        
+        if not query:
+            return Response({
+                'message': 'Please provide a search query'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        journals = Journal.objects.filter(
+            Q(title__icontains=query) |
+            Q(user__first_name__icontains=query) |
+            Q(user__last_name__icontains=query)
+        ).select_related('user')
+
+        serializer = JournalSerializer(journals, many=True)
+        
+        return Response({
+            'journals': serializer.data,
+            'count': len(journals)
+        }, status=status.HTTP_200_OK)

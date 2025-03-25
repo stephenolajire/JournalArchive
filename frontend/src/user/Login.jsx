@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import styles from "../css/Login.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../constant/api";
 import {GlobalContext} from '../constant/GlobalContext'
 
@@ -124,7 +124,9 @@ const Login = () => {
             <p className={styles.errorMsg}>{errors.password}</p>
           )}
         </div>
-        <p>forgot password</p>
+        <Link to="/forgot-password">
+          <p className={styles.forgot}>forgot password</p>
+        </Link>
 
         <button
           type="submit"

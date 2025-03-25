@@ -5,12 +5,15 @@ import Swal from "sweetalert2";
 import styles from "../css/Navigation.module.css";
 import { GlobalContext } from "../constant/GlobalContext";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import api from "../constant/api";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isAuthenticated, auth } = useContext(GlobalContext); // Add auth from context
+  const [searchQuery, setSearchQuery] = useState("");
+  const { isAuthenticated, auth } = useContext(GlobalContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("access");
@@ -33,6 +36,31 @@ const Navigation = () => {
     });
   };
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+
+    try {
+      const response = await api.get(`list/search/?q=${encodeURIComponent(searchQuery)}`);
+      console.log(response.data);
+      
+      // Navigate to search results page with data
+      navigate("/search", { 
+        state: { 
+          results: response.data,
+          searchQuery: searchQuery 
+        } 
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: "Failed to perform search",
+        icon: "error",
+        confirmButtonColor: "var(--primary)",
+      });
+    }
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
@@ -42,14 +70,18 @@ const Navigation = () => {
           </Link>
         </div>
 
-        <div className={styles.searchContainer}>
+        <form className={styles.searchContainer} onSubmit={handleSearch}>
           <input
             type="search"
-            placeholder="Search journals..."
+            placeholder="Search by title or author..."
             className={styles.searchInput}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <FaSearch className={styles.searchIcon} />
-        </div>
+          <button type="submit" className={styles.searchButton}>
+            <FaSearch className={styles.searchIcon} />
+          </button>
+        </form>
 
         <button
           className={styles.menuButton}
