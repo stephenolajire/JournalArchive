@@ -124,6 +124,7 @@ const Login = () => {
             <p className={styles.errorMsg}>{errors.password}</p>
           )}
         </div>
+        <p>forgot password</p>
 
         <button
           type="submit"
