@@ -16,6 +16,9 @@ from decouple import config
 from datetime import timedelta
 import cloudinary
 import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,8 +97,22 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     "default": dj_database_url.parse(config("DATABASE_URL"))
+# }
+
 DATABASES = {
-    "default": dj_database_url.parse(config("DATABASE_URL"))
+    'default': {
+        'ENGINE': config('engine'),
+        'NAME': config('name'),
+        'USER': config('user'),
+        'PASSWORD': config('password'),
+        'HOST': config('host'),
+        'PORT': config('port'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
+    }
 }
 
 # Password validation
