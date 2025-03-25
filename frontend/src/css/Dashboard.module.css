@@ -161,6 +161,7 @@
   max-width: 500px;
   width: 100%;
   position: relative;
+  overflow-y: auto;
 }
 
 .modalContent h3 {
