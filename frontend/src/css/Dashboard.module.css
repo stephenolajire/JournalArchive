@@ -78,7 +78,7 @@
 }
 
 .journalCard h3 {
-  color: var(--light);
+  color: var(--primary-color);
   font-size: var(--font-size-lg);
   margin-bottom: var(--spacing-md);
 }
