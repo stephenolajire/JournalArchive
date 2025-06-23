@@ -97,23 +97,23 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     "default": dj_database_url.parse(config("SERVICE_URI"))
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': config('engine'),
-        'NAME': config('name'),
-        'USER': config('user'),
-        'PASSWORD': config('password'),
-        'HOST': config('host'),
-        'PORT': config('port'),
-        'OPTIONS': {
-            'sslmode': 'require',
-        }
-    }
+    "default": dj_database_url.parse(config("DATABASE_URL"))
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': config('engine'),
+#         'NAME': config('name'),
+#         'USER': config('user'),
+#         'PASSWORD': config('password'),
+#         'HOST': config('host'),
+#         'PORT': config('port'),
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

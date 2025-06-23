@@ -61,16 +61,16 @@ class JournalSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Abstract must not exceed 5000 characters.")
         return value.strip()
 
-    def validate_keywords(self, value):
-        if not value:
-            raise serializers.ValidationError("At least one keyword is required.")
-        keywords_list = [kw.strip() for kw in value.split(",") if kw.strip()]
-        if len(keywords_list) < 1:
-            raise serializers.ValidationError("Please provide at least 2 keywords, separated by commas.")
-        if len(keywords_list) > 100:  # Add maximum keywords limit
-            raise serializers.ValidationError("Maximum 10 keywords are allowed.")
-        # Remove duplicates and join back
-        return ", ".join(list(dict.fromkeys(keywords_list)))
+    # def validate_keywords(self, value):
+    #     if not value:
+    #         raise serializers.ValidationError("At least one keyword is required.")
+    #     keywords_list = [kw.strip() for kw in value.split(",") if kw.strip()]
+    #     if len(keywords_list) < 1:
+    #         raise serializers.ValidationError("Please provide at least 2 keywords, separated by commas.")
+    #     if len(keywords_list) > 100:  # Add maximum keywords limit
+    #         raise serializers.ValidationError("Maximum 10 keywords are allowed.")
+    #     # Remove duplicates and join back
+    #     return ", ".join(list(dict.fromkeys(keywords_list)))
 
     def validate_file(self, value):
         if not value:
